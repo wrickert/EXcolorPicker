@@ -1,6 +1,6 @@
 import sys
 import tkinter as tk
-from PIL import Image, ImageTk
+#from PIL import Image, ImageTk
 from tkinter import *
 from lifxlan import * #BLUE, COLD_WHITE, CYAN, GOLD, GREEN, LifxLAN, ORANGE, PINK, PURPLE, RED, WARM_WHITE, WHITE, YELLOW
 
@@ -17,7 +17,7 @@ win.title("Zoe and Eliot's Awesome Color Picker!!")
 win.overrideredirect(True)
 
 #=========This is the line that works for fullscreen======
-#win.geometry("{0}x{1}+0+0".format(win.winfo_screenwidth(), win.winfo_screenheight()))
+win.geometry("{0}x{1}+0+0".format(win.winfo_screenwidth(), win.winfo_screenheight()))
 
 #redjImg = Image.open("red.jpg")
 #redImg = ImageTk.PhotoImage(redjImg)
@@ -78,25 +78,29 @@ purple = Button(win, text="PURPLE", command=purpleBtn, bg="purple" )
 orange = Button(win, text="ORANGE", command=orangeBtn, bg="orange" )
 yellow = Button(win, text="YELLOW", command=yellowBtn, bg="yellow" )
 
+#Global height and width settings
+x = 33
+y = 10
+
 white.grid(row = 4, column = 1, sticky = W)
-white.config(height=10, width=40)
+white.config(height=y, width=x)
 off.grid(row = 4, column = 3, sticky = W)
-off.config(height=10, width=40)
-red.config(height=10, width=40)
+off.config(height=y, width=x)
+red.config(height=y, width=x)
 red.grid(row = 1, column = 1, sticky = W)
-red.config(height=10, width=40)
-red.config(height=10, width=40)
+red.config(height=y, width=x)
+red.config(height=y, width=x)
 blue.grid(row = 1, column = 2, sticky = W)
-blue.config(height=10, width=40)
+blue.config(height=y, width=x)
 green.grid(row = 1, column = 3, sticky = W)
-green.config(height=10, width=40)
+green.config(height=10, width=x)
 pink.grid(row = 2, column = 1, sticky = W)
-pink.config(height=10, width=40)
+pink.config(height=10, width=x)
 purple.grid(row = 2, column = 2, sticky = W)
-purple.config(height=10, width=40)
+purple.config(height=10, width=x)
 orange.grid(row = 2, column = 3, sticky = W)
-orange.config(height=10, width=40)
+orange.config(height=10, width=x)
 yellow.grid(row = 4, column = 2, sticky = W)
-yellow.config(height=10, width=40)
+yellow.config(height=10, width=x)
 
 win.mainloop()
