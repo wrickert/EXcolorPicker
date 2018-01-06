@@ -9,6 +9,7 @@ lifxlan = LifxLAN()
 #Define our lights
 #This is the mini
 one = Light("d0:73:d5:30:7b:d9", "192.168.0.111")
+#This is the other one
 two = Light("d0:73:d5:20:93:d5", "192.168.0.109")
 
 win = tk.Tk()
@@ -17,56 +18,67 @@ win.title("Zoe and Eliot's Awesome Color Picker!!")
 win.overrideredirect(True)
 
 #=========This is the line that works for fullscreen======
-win.geometry("{0}x{1}+0+0".format(win.winfo_screenwidth(), win.winfo_screenheight()))
+#win.geometry("{0}x{1}+0+0".format(win.winfo_screenwidth(), win.winfo_screenheight()))
 
-#redjImg = Image.open("red.jpg")
-#redImg = ImageTk.PhotoImage(redjImg)
-#blueImg = Image.open("blue.jpg")
+def checkPower():
+    status = one.get_power()
+    if status < 300:
+        one.set_power(65535, 1000, rapid=True)
+        two.set_power(65535, 1000, rapid=True)
+    print(status)
 
 def whiteBtn():
     print('white')
-    one.set_color(WHITE)
-    two.set_color(WHITE)
+    checkPower()
+    one.set_color(WHITE, rapid=True)
+    two.set_color(WHITE, rapid=True)
 
 def offBtn():
     print('off')
-    one.set_color()
-    two.set_color()
+    one.set_power(0, 1000, rapid=True)
+    two.set_power(0, 1000, rapid=True)
 
 def redBtn():
     print('red') 
-    one.set_color(RED)
-    two.set_color(RED)
+    checkPower()
+    one.set_color(RED, rapid=True)
+    two.set_color(RED, rapid=True)
 
 def bluBtn():
     print('blue')
-    one.set_color(BLUE)
-    two.set_color(BLUE)
+    checkPower()
+    one.set_color(BLUE, rapid=True)
+    two.set_color(BLUE, rapid=True)
 
 def greenBtn():
     print('green')
-    one.set_color(GREEN)
-    two.set_color(GREEN)
+    checkPower()
+    one.set_color(GREEN, rapid=True)
+    two.set_color(GREEN, rapid=True)
 
 def pinkBtn():
     print('pink')
-    one.set_color(PINK)
-    two.set_color(PINK)
+    checkPower()
+    one.set_color(PINK, rapid=True)
+    two.set_color(PINK, rapid=True)
 
 def purpleBtn():
     print('purple')
-    one.set_color(PURPLE)
-    two.set_color(PURPLE)
+    checkPower()
+    one.set_color(PURPLE, rapid=True)
+    two.set_color(PURPLE, rapid=True)
 
 def orangeBtn():
     print('orange')
-    one.set_color(ORANGE)
-    two.set_color(ORANGE)
+    checkPower()
+    one.set_color(ORANGE, rapid=True)
+    two.set_color(ORANGE, rapid=True)
     
 def yellowBtn():
     print('yellow') 
-    one.set_color(YELLOW)
-    two.set_color(YELLOW)
+    checkPower()
+    one.set_color(YELLOW, rapid=True)
+    two.set_color(YELLOW, rapid=True)
 
 white = Button(win, text="WHITE", command=whiteBtn)
 off = Button(win, text="OFF", command=offBtn)
