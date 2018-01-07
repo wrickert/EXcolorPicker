@@ -1,10 +1,12 @@
 import sys
 import tkinter as tk
+from datetime import datetime
 #from PIL import Image, ImageTk
 from tkinter import *
 from lifxlan import * #BLUE, COLD_WHITE, CYAN, GOLD, GREEN, LifxLAN, ORANGE, PINK, PURPLE, RED, WARM_WHITE, WHITE, YELLOW
 def __init__():
     status = 65530
+    enable = false
 
 lifxlan = LifxLAN()
 
@@ -25,86 +27,106 @@ win.overrideredirect(True)
 #=========This is the line that works for fullscreen======
 #win.geometry("{0}x{1}+0+0".format(win.winfo_screenwidth(), win.winfo_screenheight()))
 
+#Lets not allow Zoe to wake her brother up at all hours
+def checkTime():
+    time = datetime.now().time().hour 
+    if time > 6 and time < 21:
+        return True
+    else:
+        return False
+
+#Check to see if power is on, if not turn it on
 def checkPower():
-    status = one.get_power()
-    if status < 300:
-        one.set_power(65535, 1000, rapid=True)
-        two.set_power(65535, 1000, rapid=True)
-        dim.set(65535)
-    print(status)
+    if checkTime():
+        status = one.get_power()
+        if status < 300:
+            one.set_power(65535, 1000, rapid=True)
+            two.set_power(65535, 1000, rapid=True)
+            dim.set(65535)
+            print(status)
 
 def whiteBtn():
-    print('white')
-    checkPower()
-    one.set_color(WHITE, rapid=True)
-    two.set_color(WHITE, rapid=True)
+    if checkTime():
+        print('white')
+        checkPower()
+        one.set_color(WHITE, rapid=True)
+        two.set_color(WHITE, rapid=True)
 
 def offBtn():
-    print('off')
-    if one.get_power() < 300:
-        one.set_power(65535, 1000, rapid=True)
-        two.set_power(65535, 1000, rapid=True)
-        dim.set(65535)
-    else:
-        one.set_power(0, 1000, rapid=True)
-        two.set_power(0, 1000, rapid=True)
-        dim.set(0)
-        status = 0
+    if checkTime():
+        print('off')
+        if one.get_power() < 300:
+            one.set_power(65535, 1000, rapid=True)
+            two.set_power(65535, 1000, rapid=True)
+            dim.set(65535)
+        else:
+            one.set_power(0, 1000, rapid=True)
+            two.set_power(0, 1000, rapid=True)
+            dim.set(0)
+            status = 0
 
 def redBtn():
-    print('red') 
-    checkPower()
-    one.set_color(RED, rapid=True)
-    two.set_color(RED, rapid=True)
+    if checkTime():
+        print('red') 
+        checkPower()
+        one.set_color(RED, rapid=True)
+        two.set_color(RED, rapid=True)
 
 def bluBtn():
-    print('blue')
-    checkPower()
-    one.set_color(BLUE, rapid=True)
-    two.set_color(BLUE, rapid=True)
+    if checkTime():
+        print('blue')
+        checkPower()
+        one.set_color(BLUE, rapid=True)
+        two.set_color(BLUE, rapid=True)
 
 def greenBtn():
-    print('green')
-    checkPower()
-    one.set_color(GREEN, rapid=True)
-    two.set_color(GREEN, rapid=True)
+    if checkTime():
+        print('green')
+        checkPower()
+        one.set_color(GREEN, rapid=True)
+        two.set_color(GREEN, rapid=True)
 
 def pinkBtn():
-    print('pink')
-    checkPower()
-    one.set_color(PINK, rapid=True)
-    two.set_color(PINK, rapid=True)
+    if checkTime():
+        print('pink')
+        checkPower()
+        one.set_color(PINK, rapid=True)
+        two.set_color(PINK, rapid=True)
 
 def purpleBtn():
-    print('purple')
-    checkPower()
-    one.set_color(PURPLE, rapid=True)
-    two.set_color(PURPLE, rapid=True)
+    if checkTime():
+        print('purple')
+        checkPower()
+        one.set_color(PURPLE, rapid=True)
+        two.set_color(PURPLE, rapid=True)
 
 def orangeBtn():
-    print('orange')
-    checkPower()
-    one.set_color(ORANGE, rapid=True)
-    two.set_color(ORANGE, rapid=True)
+    if checkTime():
+        print('orange')
+        checkPower()
+        one.set_color(ORANGE, rapid=True)
+        two.set_color(ORANGE, rapid=True)
     
 def yellowBtn():
-    print('yellow') 
-    checkPower()
-    one.set_color(YELLOW, rapid=True)
-    two.set_color(YELLOW, rapid=True)
+    if checkTime():
+        print('yellow') 
+        checkPower()
+        one.set_color(YELLOW, rapid=True)
+        two.set_color(YELLOW, rapid=True)
 
 #minor annoyance, to set the brightness you have to set hue,saturation,and color
 def doDim(value):
-    hue = one.get_color()
-    one.set_hue(hue[0], rapid=True)
-    one.set_saturation(hue[1], rapid=True)
-    one.set_brightness(value, rapid=True)
-    one.set_colortemp(hue[3], rapid=True)
+    if checkTime():
+        hue = one.get_color()
+        one.set_hue(hue[0], rapid=True)
+        one.set_saturation(hue[1], rapid=True)
+        one.set_brightness(value, rapid=True)
+        one.set_colortemp(hue[3], rapid=True)
 
-    two.set_hue(hue[0], rapid=True)
-    two.set_saturation(hue[1], rapid=True)
-    two.set_brightness(value, rapid=True)
-    two.set_colortemp(hue[3], rapid=True)
+        two.set_hue(hue[0], rapid=True)
+        two.set_saturation(hue[1], rapid=True)
+        two.set_brightness(value, rapid=True)
+        two.set_colortemp(hue[3], rapid=True)
     
 #Set our 9 buttons
 white = Button(win, text="WHITE", command=whiteBtn)
